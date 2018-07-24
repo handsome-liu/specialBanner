@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<!--
+　　 へ　　　　　／|
+　　/＼7　　∠＿/
+　 /　│　　 ／　／
+　│　Z ＿,＜　／　　 /`ヽ
+　│　　　　　ヽ　　 /　　〉
+　 Y　　　　　`　 /　　/
+　ｲ●　､　●　　⊂⊃〈　　/
+　()　 へ　　　　|　＼〈
+　　>ｰ ､_　 ィ　 │ ／／
+　 / へ　　 /　ﾉ＜| ＼＼
+　 ヽ_ﾉ　　(_／　 │／／
+　　7　　　　　　　|／
+　　＞―r￣￣`ｰ―＿
+皮卡丘,对偷看者使用十万伏特
+-->
+
+<head>
+    <!--声明当前页面的编码集:charset=gbk,gb2312(中文编码),UTF-8(国际编码)-->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- 视窗  -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <!--声明当前页面的三要素-->
+    <title>折纸效果</title>
+    <meta name="Author" content="" />
+    <!--作者-->
+    <meta name="keywords" content="关键词,关键词" />
+    <!--关键词：英文逗号隔开 31字-->
+    <meta name="description" content="" />
+    <!--网站概述：百度80字以内 标准是76个字-->
+    <link rel="shortcut icon" type="images/x-icon" href="icon/psyduck.ico" />
+    <!-- css -->
+    <style type="text/css">
+        /* css通用样式 */
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 14px/1.5 "Micrisoft YaHei";
+        }
+
+        ul,
+        li {
+            list-style-type: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* 自身样式 */
+
+        .fold {
+            width: 200px;
+            margin: 50px auto;
+            text-align: center;
+            perspective: 800px;
+            /*视距*/
+        }
+
+        .fold h3 {
+            position: relative;
+            z-index: 1;
+            background: #ccc;
+            line-height: 40px;
+        }
+
+        .fold a {
+            display: block;
+            margin-bottom: 2px;
+            background: #30B7CE;
+            font-weight: bold;
+            color: #fff;
+            line-height: 40px;
+        }
+
+        .fold div {
+            position: absolute;
+            width: 100%;
+            transform-style: preserve-3d;
+            /*打造3D环境*/
+            transform-origin: top;
+            /*以顶部为旋转中心*/
+            transition: 1s;
+            transform: rotateX(-50deg);
+            /*默认卷上去*/
+        }
+
+        .fold div.down {
+            animation: down 1.2s ease forwards;
+        }
+
+        .fold div.up {
+            animation: up 1.2s ease forwards;
+        }
+
+        @keyframes down {
+            0% {
+                transform: rotateX(-120deg);
+            }
+            25% {
+                transform: rotateX(60deg);
+            }
+            50% {
+                transform: rotateX(-30deg);
+            }
+            75% {
+                transform: rotateX(15deg);
+                box-shadow: inset 0 0 10px 5px #000;
+            }
+            100% {
+                transform: rotateX(0deg);
+            }
+        }
+
+        @keyframes up {
+            0% {
+                transform: rotateX(0deg);
+            }
+            25% {
+                transform: rotateX(15deg);
+                box-shadow: inset 0 0 10px 5px #000;
+            }
+            50% {
+                transform: rotateX(-30deg);
+            }
+            75% {
+                transform: rotateX(60deg);
+            }
+            100% {
+                transform: rotateX(-120deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fold" class="fold">
+        <h3>折叠菜单</h3>
+        <div>
+            <a href="javascript:void(0)">item1</a>
+            <div>
+                <a href="javascript:void(0)">item2</a>
+                <div>
+                    <a href="javascript:void(0)">item3</a>
+                    <div>
+                        <a href="javascript:void(0)">item4</a>
+                        <div>
+                            <a href="javascript:void(0)">item5</a>
+                            <div>
+                                <a href="javascript:void(0)">item6</a>
+                                <div>
+                                    <a href="javascript:void(0)">item7</a>
+                                    <div>
+                                        <a href="javascript:void(0)">item8</a>
+                                        <div>
+                                            <a href="javascript:void(0)">item9</a>
+                                            <div>
+                                                <a href="javascript:void(0)">item10</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    "use strict";
+    var fold = document.getElementById("fold"),
+        oH3 = fold.querySelector("h3"),
+        list = fold.querySelectorAll("div"),
+        timeInterval = 200,
+        timer = null;
+    oH3.onoff = true;
+    oH3.index = 0;
+
+    oH3.onclick = function () {
+        clearInterval(timer);
+        if (this.onoff) {
+            timer = setInterval(function () {
+                list[this.index].className = "down";
+                if (++this.index == list.length) {
+                    clearInterval(timer);
+                    this.onoff = false;
+                }
+            }.bind(this), timeInterval);
+        } else {
+            timer = setInterval(function () {
+                list[--this.index].className = "up";
+                if (this.index == 0) {
+                    clearInterval(timer);
+                    this.onoff = true;
+                }
+            }.bind(this), timeInterval);
+        }
+    };
+</script>
+
+
+</html>

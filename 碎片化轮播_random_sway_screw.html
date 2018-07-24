@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<!--
+　　 へ　　　　　／|
+　　/＼7　　∠＿/
+　 /　│　　 ／　／
+　│　Z ＿,＜　／　　 /`ヽ
+　│　　　　　ヽ　　 /　　〉
+　 Y　　　　　`　 /　　/
+　ｲ●　､　●　　⊂⊃〈　　/
+　()　 へ　　　　|　＼〈
+　　>ｰ ､_　 ィ　 │ ／／
+　 / へ　　 /　ﾉ＜| ＼＼
+　 ヽ_ﾉ　　(_／　 │／／
+　　7　　　　　　　|／
+　　＞―r￣￣`ｰ―＿
+皮卡丘,对偷看者使用十万伏特
+-->
+<head>
+    <!--声明当前页面的编码集:charset=gbk,gb2312(中文编码),UTF-8(国际编码)-->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- 视窗  -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <!--声明当前页面的三要素-->
+    <title>碎片化轮播_screw</title>
+    <meta name="Author" content="" /><!--作者-->
+    <meta name="keywords" content="关键词,关键词" /><!--关键词：英文逗号隔开 31字-->
+    <meta name="description" content="" /><!--网站概述：百度80字以内 标准是76个字-->
+    <link rel="shortcut icon" type="images/x-icon" href="icon/psyduck.ico" />
+    <!-- css -->
+    <style type="text/css">
+        /* css通用样式 */
+        *{margin:0;padding:0;}
+        body{font: 14px/1.5 "Microsoft YaHei";background: #368;}
+        ul,li{list-style-type: none;}
+        /* 自身样式 */
+        .banner{
+            position: relative;
+            width: 1226px;
+            height: 460px;
+            margin: 50px auto;
+            border: 5px dashed red;
+        }
+        .banner .img li{
+            display: none;
+            position: absolute;
+        }
+        .banner .arrow li{
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            bottom: 0;
+            width: 41px;
+            height: 69px;
+            margin: auto;
+            background: url("images/banner/icon-slides.png") no-repeat;
+            cursor: pointer;
+        }
+        .banner .arrow .left{
+            left: 0;
+            background-position: calc(-42px * 2) 0;
+        }
+        .banner .arrow .left:hover{
+            background-position: calc(-42px * 0) 0;
+        }
+        .banner .arrow .right{
+            right: 0;
+            background-position: calc(-42px * 3 + 2px) 0;
+        }
+        .banner .arrow .right:hover{
+            background-position: calc(-42px * 1) 0;
+        }
+        .banner .page{
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            bottom: 20px;
+            height: 25px;
+            padding: 5px;
+            background: hsla(0,100%,0%,.5);
+            border-radius: 35px;
+        }
+        .banner .page li{
+            float: left;
+            width: 25px;
+            height: 25px;
+            margin: 0 5px;
+            background: #fff;
+            border-radius: 50%;
+            font-weight: bold;
+            line-height: 25px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .banner .page li.on{
+            background: #FF7916;
+            color: #fff;
+        }
+        .banner .mask{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .banner .mask li{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- random -->
+    <div id="banner" class="banner">
+        <ul class="img">
+            <li><img src="images/banner/1.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/2.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/3.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/4.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/5.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/6.jpg" alt="" width="1226" height="460" /></li>
+        </ul>
+        <ul class="arrow">
+            <li class="left"></li>
+            <li class="right"></li>
+        </ul>
+        <ul class="page"></ul>
+        <ul class="mask"></ul>
+    </div>
+
+    <!-- sway -->
+    <div id="banner1" class="banner">
+        <ul class="img">
+            <li><img src="images/banner/1.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/2.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/3.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/4.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/5.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/6.jpg" alt="" width="1226" height="460" /></li>
+        </ul>
+        <ul class="arrow">
+            <li class="left"></li>
+            <li class="right"></li>
+        </ul>
+        <ul class="page"></ul>
+        <ul class="mask"></ul>
+    </div>
+
+    <!-- screw -->
+    <div id="banner2" class="banner">
+        <ul class="img">
+            <li><img src="images/banner/1.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/2.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/3.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/4.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/5.jpg" alt="" width="1226" height="460" /></li>
+            <li><img src="images/banner/6.jpg" alt="" width="1226" height="460" /></li>
+        </ul>
+        <ul class="arrow">
+            <li class="left"></li>
+            <li class="right"></li>
+        </ul>
+        <ul class="page"></ul>
+        <ul class="mask"></ul>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    "use strict";
+    $.fn.extend({
+        banner: function(json) {
+            var $banner = this,
+                $li = $banner.find(".img li"), //存放轮播图片的每个li
+                $img = $banner.find(".img li img"), //每张图片的信息
+                $arrow = $banner.find(".arrow li"), //左右按钮
+                $page = $banner.find(".page"), //分页器
+                $mask = $banner.find(".mask"), //遮罩特效
+                lenPageLi = $img.length, //图片、分页器的个数
+                pageLi = [], //保存根据img生成的每个分页器li标签
+                sign = json.sign || 0, //图片起始标记//改?
+                specialName = json.specialName, //特效效果name
+                maskX = json.maskX || 20, //列x
+                maskY = json.maskY || 10, //行y
+                maskWidth = $banner.width() / maskX, //每个mask碎片的宽
+                maskHeight = $banner.height() / maskY, //每个mask碎片的高
+                srcImg = "",
+                timer = null,
+                frag = document.createDocumentFragment();
+            //遍历生成page的li元素
+            for (var i = 0; i < lenPageLi; i++) {
+                var $item = $("<li>" + (i + 1) + "</li>");
+                if (i == sign) {
+                    $item.attr({
+                        "class": "on"
+                    });
+                }
+                $(frag).append($item);
+                pageLi.push($item);
+            }
+            //把frag这个虚拟节点放进去目标节点
+            $page.append(frag);
+            //动态居中分页器
+            $page.css({
+                marginLeft: -0.5 * $page.width()
+            });
+            //初始化第一张图片
+            $li.eq(sign).fadeIn("fast");
+            //每个分页器的点击事件
+            $page.on("click", "li", function() {
+                chop(function() {
+                    special(specialName, sign <= $(this).index() ? 1 : 0);
+                    sign = $(this).index();
+                }.bind(this));
+            });
+            //按钮
+            $arrow.on("click", function() {
+                chop(function() {
+                    special(specialName, $(this).index() % 2);
+                    if ($(this).index()) {
+                        sign = ++sign % lenPageLi;
+                    } else {
+                        if (--sign < 0) {
+                            sign = lenPageLi - 1;
+                        }
+                    }
+                }.bind(this));
+            });
+            //阻止默认事件
+            $banner.on({
+                selectstart: function(event) {
+                    event.preventDefault();
+                },
+                ondragstart: function(event) {
+                    event.preventDefault();
+                }
+            });
+            //切换函数
+            function chop(fn) {
+                pageLi[sign].removeClass('on');
+                $li.eq(sign).fadeOut("fast");
+                srcImg = $img.eq(sign).attr("src");
+                fn();
+                $li.eq(sign).fadeIn("fast");
+                pageLi[sign].addClass('on');
+            }
+            //特效函数random/sway/screw
+            function special(specialName, direction) {
+                var maskArr = []; //创建,重置
+                // frag = document.createDocumentFragment();
+                $mask.empty(); //清空mask内容
+                clearInterval(timer);
+                for (var y = 0; y < maskY; y++) {
+                    for (var x = 0; x < maskX; x++) {
+                        var $item = $("<li></li>");
+                        // var $item = $("<li>("+x+","+y+")</li>");
+                        $item.css({
+                            width: maskWidth,
+                            height: maskHeight,
+                            background: "url('" + srcImg + "')",
+                            transition: "1s",
+                            backgroundPosition: -x * maskWidth + "px -" + y * maskHeight + "px"
+                        });
+                        $item.x = x;
+                        $item.y = y;
+                        $(frag).append($item);
+                        maskArr.push($item);
+                    }
+                }
+                //把frag这个虚拟节点放进去目标节点
+                $mask.append(frag);
+                //必须把每个item 添加进去mask后才能定位left和top定位属性,不然获取不到 ,undefined
+                $(maskArr).each(function() {
+                    $(this).css({
+                        left: this.position().left,
+                        top: this.position().top
+                    });
+                });
+                //等left和top的值写入后再写absolute实现绝对定位
+                $(maskArr).each(function() {
+                    $(this).css({
+                        position: "absolute"
+                    });
+                });
+                //特效方式具体函数,上面都是生成mask的设置
+                switch (specialName) {
+                    case "random":
+                        timer = setInterval(function() {
+                            var index = Math.floor(Math.random() * maskArr.length);
+                            $(maskArr[index]).css({
+                                transform: "translate(" + (Math.random() - 0.5) * 10 * maskWidth + "px," + (Math.random() - 0.5) * 10 * maskHeight + "px) rotate(" + (Math.random() - 0.5) * 180 + "deg) skew(" + (Math.random() - 0.5) * 90 + "deg) scale(" + (Math.random() - 0.5) + ")"
+                            }).fadeOut(1000);
+                            maskArr.splice(index, 1);
+                            if (!maskArr.length) {
+                                clearInterval(timer);
+                            }
+                        }, 1000 / 60);
+                        break;
+                    case "sway":
+                        if (direction) {
+                            var count = 0; //起初是(0,0)
+                            timer = setInterval(function() {
+                                $(maskArr).each(function() {
+                                    //符合条件是x+y的值相等的每个小mask
+                                    if (this.x + this.y == count) {
+                                        this.css({
+                                            transform: "translate(-150px,-150px) rotate(60deg)"
+                                        }).fadeOut(200);//加上fade动画才能使transition有效
+                                    }
+                                });
+                                //直到count增加到比x+y的最大值还大,清除定时器
+                                if (++count >= maskX + maskY - 1) {
+                                    clearInterval(timer);
+                                }
+                            }, 1000 / 60);
+                        } else {
+                            count = maskX - 1; //起初是(x,0)
+                            timer = setInterval(function() {
+                                $(maskArr).each(function() {
+                                    //符合条件是x-y的值相等的每个小mask
+                                    if (this.x - this.y == count) {
+                                        this.css({
+                                            transform: "translate(150px,-150px) rotate(-60deg)"
+                                        }).fadeOut(200);
+                                    }
+                                });
+                                //直到count减少到比x-y的最小值还小,清除定时器
+                                if (--count <= -maskY) {
+                                    clearInterval(timer);
+                                }
+                            }, 1000 / 60);
+                        }
+                        break;
+                    case "screw":
+                        //min,max是四个边界值
+                        var minX = 0,
+                            maxX = maskX - 1,
+                            minY = 0,
+                            maxY = maskY - 1;
+                        x = 0; //对应x坐标
+                        y = 0; //对应y坐标
+                        count = 0; //统计数,用来计算何时停止计时器
+                        timer = setInterval(function() {
+                            $(maskArr[x + y * maskX]).css({
+                                transform: "scale(0.2)"
+                            }).fadeOut(1000);
+                            if (x == minX && y - 1 == minY) { //x不变在最小值,y到最小值的前一个,拐弯
+                                minX++;
+                                minY++;
+                                maxX--;
+                                maxY--;
+                            }
+                            if (x < maxX && y == minY) { //x由小到大,y不变在最小值
+                                x++;
+                            } else if (x == maxX && y < maxY) { //x不变在最小值,y由小到大
+                                y++;
+                            } else if (x > minX && y == maxY) { //x由大到小,y不变在最大值
+                                x--;
+                            } else { //x不变在最小值,y由大到小
+                                y--;
+                            }
+                            if (++count >= maskX * maskY) {//超过总个数就停止
+                                clearInterval(timer);
+                            }
+                        }, 1000 / 60);
+                        break;
+                    default:
+                        console.log("special name is error");
+                        break;
+                }
+            }
+        }
+    });
+</script>
+<script type="text/javascript">
+    "use strict";
+    $("#banner").banner({
+        sign:0,
+        maskX:20,
+        maskY:10,
+        specialName:"random",
+        // specialName:"sway",
+        // specialName:"screw",
+    });
+    $("#banner1").banner({
+        sign:0,
+        maskX:20,
+        maskY:10,
+        // specialName:"random",
+        specialName:"sway",
+        // specialName:"screw",
+    });
+    $("#banner2").banner({
+        sign:0,
+        maskX:20,
+        maskY:10,
+        // specialName:"random",
+        // specialName:"sway",
+        specialName:"screw",
+    });
+</script>
+</html>
+

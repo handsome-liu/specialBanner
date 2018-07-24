@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<!--
+　　 へ　　　　　／|
+　　/＼7　　∠＿/
+　 /　│　　 ／　／
+　│　Z ＿,＜　／　　 /`ヽ
+　│　　　　　ヽ　　 /　　〉
+　 Y　　　　　`　 /　　/
+　ｲ●　､　●　　⊂⊃〈　　/
+　()　 へ　　　　|　＼〈
+　　>ｰ ､_　 ィ　 │ ／／
+　 / へ　　 /　ﾉ＜| ＼＼
+　 ヽ_ﾉ　　(_／　 │／／
+　　7　　　　　　　|／
+　　＞―r￣￣`ｰ―＿
+皮卡丘,对偷看者使用十万伏特
+-->
+<head>
+    <!--声明当前页面的编码集:charset=gbk,gb2312(中文编码),UTF-8(国际编码)-->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <!--如果是IE 就以标准渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- 视窗  -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <!--声明当前页面的三要素-->
+    <title>无缝轮播对象重写继承自动轮播2.0</title>
+    <meta name="Author" content="" /><!--作者-->
+    <meta name="keywords" content="关键词,关键词" /><!--关键词：英文逗号隔开 31字-->
+    <meta name="description" content="" /><!--网站概述：百度80字以内 标准是76个字-->
+    <link rel="shortcut icon" type="images/x-icon" href="icon/psyduck.ico" />
+    <!-- css -->
+    <style type="text/css">
+        /* css通用样式 */
+        *{margin:0;padding:0;}
+        body{background: #368;}
+        ul,li{list-style-type: none;}
+        /* 自身样式 */
+        .banner {
+            position: relative;
+            width: 1226px;
+            height: 460px;
+            margin: 50px auto;
+            /*border: 5px dotted red;*/
+            overflow: hidden;
+        }
+
+        .ul {
+            position: relative;
+            width: 10000%;
+        }
+
+        .ul li {
+            float: left;
+        }
+
+        .page {
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            height: 20px;
+            padding: 5px 10px;
+            background: hsla(0, 100%, 0%, .5);
+            border-radius: 30px;
+        }
+
+        .page li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 0 5px;
+            background: hsla(0, 100%, 100%, .8);
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .page li.select {
+            background: #FF7916;
+            color: #fff;
+        }
+
+        .banner span {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 42px;
+            height: 69px;
+            margin: auto;
+            background: url("images/banner/icon-slides.png") no-repeat hsla(0, 100%, 0%, .5);
+            cursor: pointer;
+        }
+
+        .banner .left {
+            left: 0;
+            background-position: -84px 0px;
+        }
+
+        .banner .left:hover {
+            background-position: 0px 0px;
+        }
+
+        .banner .right {
+            right: 0;
+            background-position: -124px 0px;
+        }
+
+        .banner .right:hover {
+            background-position: -42px 0px;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .box {
+            position: absolute;
+            z-index: 1;
+            width: 100px;
+            height: 100px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div id="banner" class="banner">
+        <ul class="ul clearfix">
+            <li><img src="images/banner/1.jpg" alt="" /></li>
+            <li><img src="images/banner/2.jpg" alt="" /></li>
+            <li><img src="images/banner/3.jpg" alt="" /></li>
+            <li><img src="images/banner/4.jpg" alt="" /></li>
+            <li><img src="images/banner/5.jpg" alt="" /></li>
+            <li><img src="images/banner/6.jpg" alt="" /></li>
+            <li><img src="images/banner/1.jpg" alt="" /></li>
+        </ul>
+        <ul class="page"></ul>
+        <span class="left"></span>
+        <span class="right"></span>
+    </div>
+    <div id="banner1" class="banner">
+        <ul class="ul clearfix">
+            <li><img src="images/banner/1.jpg" alt="" /></li>
+            <li><img src="images/banner/2.jpg" alt="" /></li>
+            <li><img src="images/banner/3.jpg" alt="" /></li>
+            <li><img src="images/banner/4.jpg" alt="" /></li>
+            <li><img src="images/banner/5.jpg" alt="" /></li>
+            <li><img src="images/banner/6.jpg" alt="" /></li>
+            <li><img src="images/banner/1.jpg" alt="" /></li>
+        </ul>
+        <ul class="page"></ul>
+        <span class="left"></span>
+        <span class="right"></span>
+    </div>
+</body>
+<script type="text/javascript">
+    "use strict";
+    //时间版动画
+    Element.prototype.timeAnimation = function(json, time, callback) {
+        var start = {},
+            target = {},
+            date = new Date();
+        for (var attr in json) {
+            start[attr] = parseFloat(this.getStyle(attr));
+            target[attr] = parseFloat(json[attr]);
+        }
+        move.call(this);
+
+        function move() {
+            var proportion = (new Date() - date) / time,
+                unit = "";
+            proportion >= 1 ? proportion = 1 : requestAnimationFrame(move.bind(this));
+            for (var attr in json) {
+                unit = attr == "opacity" ? "" : "px";
+                this.style[attr] = start[attr] + proportion * (target[attr] - start[attr]) + unit;
+            }
+            if (proportion == 1) callback && callback.call(this);
+        }
+    };
+    //移除类名
+    Element.prototype.removeClassName = function(str) {
+        var current = this.className.split(" "),
+            remove = str.split(" ");
+        remove.push(""); //清除current中的所有空格
+        for (var i = 0; i < remove.length; i++) {
+            for (var j = 0; j < current.length; j++) {
+                if (remove[i] == current[j]) current.splice(j--, 1);
+            }
+        }
+        this.className = current.join(" ");
+    };
+    //添加类名
+    Element.prototype.addClassName = function(str) {
+        var arr = this.className.split(" ").concat(str.split(" "));
+        for (var i = 0; i < arr.length; i++) {
+            for (var j = arr.length; j > i; j--) {
+                if (arr[i] == arr[j]) arr.splice(j, 1);
+            }
+            if (arr[i] == "") arr.splice(i--, 1); //第一个空格杀掉后面的空格，然后自杀
+        }
+        this.className = arr.join(" ");
+    };
+    //获取属性
+    Element.prototype.getStyle = function(attr) {
+        return window.getComputedStyle(this) ? window.getComputedStyle(this)[attr] : this.currentStyle[attr];
+    };
+</script>
+<script type="text/javascript">
+    "use strict";
+    //Banner
+    function Banner(id, imgTime, autoTime) {
+        this.wrap = document.getElementById(id); //显示区域
+        this.banner = document.querySelector("#" + id + " .ul"); //跑动的图片
+        this.arrow = document.querySelectorAll("#" + id + " > span"); //箭头
+        this.showWidth = parseFloat(this.wrap.getStyle("width")); //显示宽度
+        this.index = 0; //当前现实的图片序列
+        this.imgTime = imgTime || 200; //图片切换的速度
+        this.autoTime = autoTime || 1000; //定时器自动切换图片的时间
+        this.img = document.querySelectorAll("#" + id + " .ul li"); //图片个数+1
+        this.page = document.querySelector("#" + id + " .page"); //分页器
+        this.li = [];//保存生成的li节点，方便事后操作
+        this.createElement();//生成分页器li
+        this.page.style.marginLeft = -0.5 * parseFloat(this.page.getStyle("width")) + "px";//居中
+        this.pageLi = document.querySelectorAll("#" + id + " .page li"); //分页器的每个li
+        this.pageLen = this.pageLi.length; //显示的图片数量
+        this.selectstart();//禁止选中文字默认事件
+        this.dragstart();//禁止拖动图片默认事件
+        // console.log(this);
+        console.log(this.pageLen);
+    }
+    Banner.prototype = {
+        start(){
+            this.clickpage();//分页器
+            this.clickarrow();//左右箭头
+        },
+        //分页器
+        clickpage() {
+            for (var i = 0, _This = this; i < _This.pageLi.length; i++) {
+                _This.pageLi[i].index = i; //每个分页器的记号，分别对应每张图片
+                _This.pageLi[i].onclick = function() {
+                    _This.chop(function() {
+                        //_This 是函数外定义的，函数内调用_This，形成闭包
+                        _This.index = this.index;
+                    }.bind(this));
+                    //_This是chop的对象，bind(this)中的this是点击的那个li对象_This.pageLi[i]，互不影响
+                };
+            }
+        },
+        //左右箭头
+        clickarrow() {
+            for (var i = 0, _This = this; i < _This.arrow.length; i++) {
+                _This.arrow[i].sign = i; //箭头标记，0为←，1为→
+                _This.arrow[i].onclick = function() {
+                    _This.chop(function() {
+                        if (this.sign) {
+                            if (++_This.index >= _This.pageLen + 1) {
+                                _This.index = 1;
+                                _This.banner.style.right = 0;
+                            }
+                        } else {
+                            if (--_This.index < 0) {
+                                _This.index = _This.pageLen - 1;
+                                _This.banner.style.right = _This.showWidth * _This.pageLen + "px";
+                            }
+                        }
+                    }.bind(this));
+                };
+            }
+        },
+        //禁止选中文字默认事件
+        selectstart() {
+            this.wrap.onselectstart = function() {
+                return false;
+            };
+        },
+        //禁止拖动图片默认事件
+        dragstart() {
+            this.wrap.ondragstart = function() {
+                return false;
+            };
+        },
+        //切换图片函数
+        chop(fn) {
+            this.pageLi[this.index % this.pageLen].removeClassName("select");
+            fn();
+            this.banner.timeAnimation({
+                "right": this.showWidth * this.index
+            }, this.imgTime);
+            this.pageLi[this.index % this.pageLen].addClassName("select");
+        },
+        //生成分页器li
+        createElement () {
+            for (var i = 0; i < this.img.length - 1; i++) { //根据图片个数生成分页器个数
+                this.li[i] = document.createElement("li");
+                if (i == this.index) this.li[i].setAttribute("class", "select");
+                this.li[i].innerText = i + 1;
+                this.page.appendChild(this.li[i]);
+            }
+        }
+
+    }
+</script>
+<script type="text/javascript">
+    "use strict";
+    function AutoBanner (id, imgTime, autoTime) {
+        function _AutoBanner () {
+            this.init();
+        }
+        _AutoBanner.prototype = Object.create(new Banner(id, imgTime, autoTime));
+        _AutoBanner.prototype.auto = function () {
+            this.timer = setInterval(function () {
+                this.chop(function () {
+                    if (++this.index >= this.pageLen +1 ) {
+                        this.index = 1;
+                        this.banner.style.right = 0;
+                    }
+                }.bind(this));
+            }.bind(this),this.autoTime);
+        };
+        _AutoBanner.prototype.init = function () {
+            this.auto();
+            this.wrap.onmouseenter = function () {
+                clearInterval(this.timer);
+            }.bind(this);
+            this.wrap.onmouseleave = function () {
+                this.auto();
+            }.bind(this);
+        };
+        return new _AutoBanner();
+    }
+</script>
+
+<script type="text/javascript">
+    "use strict";
+    //目标轮播，图片切换速度，自动切换图片的速度
+    var banner = new Banner("banner",200,1000);
+    banner.start();
+    var banner1 = new AutoBanner("banner1",200,1000);
+    banner1.start();
+    // console.log(banner);
+</script>
+</html>
